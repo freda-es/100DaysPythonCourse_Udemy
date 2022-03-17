@@ -1,4 +1,4 @@
-from turtle import Turtle, xcor, ycor
+from turtle import Turtle
 
 #Inherit from the Turtle class so the food can be considerd as a turtle
 class Ball(Turtle):
@@ -8,9 +8,10 @@ class Ball(Turtle):
         self.penup()
         self.shapesize(stretch_len=0.5, stretch_wid=0.5)
         self.color("white")
-        self.x_move = 10
-        self.y_move = 10
-        self.move_speed = 0.1
+        self.goto(0,0)
+        self.x_move = 3
+        self.y_move = 3
+        self.speed_move = 0.1
         self.move()
      
     #determine how the ball will move in the screen   
@@ -24,9 +25,9 @@ class Ball(Turtle):
         self.y_move *= -1
     def bounce_x(self):
         self.x_move *= -1
-        self.move_speed *= 0.9
+        self.speed_move *= 0.9
     def reset_post(self):
         self.goto(0,0)
-        self.move_speed = 0.1
+        self.speed_move *= 0.1
         self.bounce_x()
 
