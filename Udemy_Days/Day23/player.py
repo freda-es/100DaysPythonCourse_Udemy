@@ -20,6 +20,6 @@ class Player(Turtle):
         if self.ycor() <= FINISH_LINE_Y: #continue the loop until it collapse with the front wall
             new_y = self.ycor() + MOVE_DISTANCE
             self.goto(self.xcor(),new_y)
-        else: # if collpase with the front wall goes at starting position to continue from the begining
+        else: # if collpase with the front wall goes at starting position to continue from the begining again
             self.goto(STARTING_POSITION)
             

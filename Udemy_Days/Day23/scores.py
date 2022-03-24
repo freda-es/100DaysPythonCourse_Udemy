@@ -17,13 +17,13 @@ class ScoreBoard(Turtle):
         self.point = 1
         self.write(f"Level {self.point}", align=ALIGNMENT, font=FONT)
 
-    #this calculate the points of eatch time snake its the food (at tha main program) becouse we call this method    
+    #this calculate the points of eatch time the turtle arrives at the front wall(makes one way without collapse with the cars)    
     def calc_points (self):
         self.clear()
         self.point += 1
         self.write(f"Level {self.point}", align=ALIGNMENT, font=FONT)
 
-    #the text of the game over in the center of the screen
+    #the text of the game over in the center of the screen when the turtle collapse with the cars
     def game_over(self):
         self.goto(0,0)
         self.write("GAME OVER", align=ALIGNMENT, font=FONT)
