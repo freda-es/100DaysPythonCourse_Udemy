@@ -4,16 +4,27 @@ MOVE_INCREMENT = 10
 from turtle import Turtle, goto
 import random
 
-class CarManager:
+class CarManager():
     
     def __init__(self):
-        self.color = random.choice(COLORS)
-        self.position = (200,20)
+        self.all_cars = []
+
     
-    def car(self):
-        self.car = Turtle(shape="square")
-        self.car.penup()
-        self.car.right(90)
-    # car.shapesize(stretch_len=0.5, stretch_wid=3)    
-        self.car.color(self.color)
-        self.car.goto(self.position)
+    def car (self):       
+        random_chance = random.randint(1, 6)
+        if random_chance == 1:
+            car = Turtle(shape="square")
+            car.penup()
+            car.shapesize(stretch_len=2, stretch_wid=0.7)    
+            car.color(random.choice(COLORS))
+            random_y = random.randint(-250, 250)
+            car.goto(280,random_y)
+            self.all_cars.append(car)
+
+    def move_cars(self):
+        for cars in self.all_cars:
+            cars.backward(STARTING_MOVE_DISTANCE)
+
+            
+            
+            
