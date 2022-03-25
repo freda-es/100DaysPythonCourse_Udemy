@@ -26,6 +26,18 @@ class Snake:
             the_squares.goto(position)
             self.the_segments.append(the_squares)
     
+    #the func whitch will be called after the collapse with the wall
+    def reset(self):
+        #in this for loop we say to the snakes witch are losers to go out of our screen
+        for seg in self.the_segments:
+            seg.goto(1000,1000)
+        
+        #clear all the segments to begin the other game if we loose
+        self.the_segments.clear()
+        #recreate the snake
+        self.SnakeBody()
+        self.head = self.the_segments[0]
+            
     def extend(self): # add a new segment to the _segment every time the snake eats a food from tha last one ([-1])      
         self.add_segment(self.the_segments[-1].position())
             

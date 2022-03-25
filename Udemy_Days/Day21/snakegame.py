@@ -38,17 +38,16 @@ while game_is_on:
         snake.extend()#extend +1
         scoreboard.calc_points() #refresh the points adn the message on the screen
         
-    #Detect collision with the wall:
+    #Detect collision with the wall, not game over but restart the game (new snake, score 0 and the high score the last one)
     if snake.head.xcor() > 290 or snake.head.xcor() < -290 or snake.head.ycor() > 290 or snake.head.ycor() < -290:
-        game_is_on = False
-        scoreboard.game_over() # call the method of the text game over
+        scoreboard.reset() # call the method of the text game over
+        snake.reset()
         
-        
-    #Detect collision with the tail:,if head collides with any segment in the tail: trigger game over
+    #Detect collision with the tail:,if head collides with any segment in the tail: again from the begining(new snake, score 0 and the high score the last one)
     for segment in snake.the_segments[1:]:
         if snake.head.distance(segment)<10: #if the distance of the head and of any segment in th_segments is less than 10
-            game_is_on = False
-            scoreboard.game_over()
+            scoreboard.reset()
+            snake.reset()
             
        
         
