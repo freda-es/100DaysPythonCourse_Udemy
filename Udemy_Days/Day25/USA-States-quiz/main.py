@@ -26,11 +26,11 @@ while len(correct_guess) <= 50:
     
     #if the player wants to quit the game
     if answer_state == "Exit":
-        #with this loop we remove from the original list of states the correct ones that the player has written
-        for correctgues in correct_guess:
-            the_state.remove(correctgues)
+        #with the lista comprehension we create the list with the states not guessed when the player finishes the game
+        missing_states = [state for state in the_state if state not in correct_guess]
+        print(missing_states)
         #create a dataframe with this list and then save it as ea csv file    
-        data_states = pandas.DataFrame(the_state)
+        data_states = pandas.DataFrame(missing_states)
         data_states.to_csv("Udemy_Days\\Day25\\USA-States-quiz\\states_to_learn.csv")
         break
     
