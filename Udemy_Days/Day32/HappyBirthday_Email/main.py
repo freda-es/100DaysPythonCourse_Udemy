@@ -1,41 +1,40 @@
-##################### Extra Hard Starting Project ######################
-
-# 1. Update the birthdays.csv
-
-# 2. Check if today matches a birthday in the birthdays.csv
-
-# 3. If step 2 is true, pick a random letter from letter templates and replace the [NAME] with the person's actual name from birthdays.csv
-
-# 4. Send the letter generated in step 3 to that person's email address.
-
-import email
-import smtplib
 import datetime as dt
 import random
 import pandas
+import smtplib
 
+#determine the current day and month as a control variable
 now = dt.datetime.now()
 today = now.day
-names = []
-emails=[]
+month = now.month
+names_emails = {}
 
+#open the file birthday.csv and make it a dict with the name and the info of the name_row
 data_files = pandas.read_csv("Day32\\HappyBirthday_Email\\birthdays.csv")
-data_birthdays = data_files.iterrows()
-name = {name:email for (name, email) in data_birthdays}
-for index in range(len(name)):
-    if name[index]['day'] == today:
-        names.append(name[index]['name'])
-        emails.append(name[index]['email'])
-        
-        
-index_letter = random.randint(1,3)
+data_dict = {name:data_row for (name, data_row) in data_files.iterrows()}
+#create another dict with the names:emails of the list whitch has the birthday today
+for index in range(len(data_dict)):
+    if data_dict[index]['day'] == today and data_dict[index]['month'] == month:
+        names_emails[data_dict[index]['name']] = data_dict[index]['email']
 
-with open(f"Day32\\HappyBirthday_Email\\letter_templates\\letter_{index_letter}.txt") as letter:
-    model_letter = letter.read()
-    print(model_letter)
-    # with open (f"Day32\\HappyBirthday_Email\\letter_templates\\lettertosend_{index_letter}.txt") as my_letters:
-    #     my_letter = model_letter.replace("[NAME]", names[0])
-    #     my_letters.write(my_letter)
+# ----sending the email-----
+my_email = "YOUR MAIL"
+passw = "YOUR PASSWORD"
+
+with smtplib.SMTP("smtp.gmail.com") as mail_connect:#connect to your email service
+    mail_connect.starttls()#secure our connection
+    mail_connect.login(user=my_email, password=passw)
+    with open(f"Day32\\HappyBirthday_Email\\letter_templates\\letter_{random.randint(1,3)}.txt") as letter:
+        model_letter = letter.read()
+        #iterate through the dict that we created and put the name in the letter model and then send it
+        for key in names_emails:
+            my_letter = model_letter.replace("[NAME]", key)  
+            mail_connect.sendmail(
+                from_addr=my_email, to_addrs=f"{names_emails[key]}", 
+                msg=f"Subject:Happy birthday\n\n{my_letter}"
+                )
+
+
 
 
 

@@ -2,8 +2,8 @@
 
 # import smtplib
 
-# my_email = "cookingfamily87@gmail.com"
-# passw = "Ansi@Vesa2022"
+# my_email = "name@gmail.com"
+# passw = "pasw"
 
 # with smtplib.SMTP("smtp.gmail.com") as connection:#connect to your email service
 #     connection.starttls()#secure our connection
@@ -42,8 +42,8 @@ with open("Day32\\quotes.txt") as quotes:
 now = dt.datetime.now()
 today = now.weekday()
 
-my_email = "cookingfamily87@gmail.com"
-passw = "Ansi@Vesa2022"
+my_email = "name@gmail.com"
+passw = "passw"
 
 
 with smtplib.SMTP("smtp.gmail.com") as mail_connect:#connect to your email service
@@ -51,7 +51,7 @@ with smtplib.SMTP("smtp.gmail.com") as mail_connect:#connect to your email servi
     mail_connect.login(user=my_email, password=passw)
     if today == 1:
         mail_connect.sendmail(
-            from_addr=my_email, to_addrs="cookingfamily87@gmail.com", 
+            from_addr=my_email, to_addrs="name7@gmail.com", 
             msg=f"Subject:Today Quote\n\n{the_quote}"
             )
 
